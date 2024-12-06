@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Config>
+	<Port>5000</Port>
+	<AesCrypto>
+		<Key>2oGR5t0NCoewf2XEC85eyA==</Key>
+		<IV>keiGyA/DPwkpPjXKsgkAzg==</IV>
+	</AesCrypto>
+</Config>
