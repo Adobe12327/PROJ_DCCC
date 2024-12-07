@@ -8,7 +8,6 @@ namespace PROJ_DCCC
 {
     internal class Program
     {
-        //밍...
         static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
