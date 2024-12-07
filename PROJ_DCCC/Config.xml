@@ -5,4 +5,10 @@
 		<Key>2oGR5t0NCoewf2XEC85eyA==</Key>
 		<IV>keiGyA/DPwkpPjXKsgkAzg==</IV>
 	</AesCrypto>
+	<DataBase>
+		<Server>localhost</Server>
+		<Database>dccc1</Database>
+		<UserID>root</UserID>
+		<Password></Password>
+	</DataBase>
 </Config>

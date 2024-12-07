@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PROJ_DCCC.HTTP.DTO.Response
 {
-    class CheckService : HTTPResponce
+    class RP_CheckService : HTTPResponce
     {
         public override void Process(HTTPRequest request)
         {

@@ -89,17 +89,22 @@ namespace PROJ_DCCC.HTTP
             output.Write(data, 0, data.Length);
         }
 
-        private static T GetDecryptedDTO<T>(byte[] ClientRequestData)
+        public static T GetDecryptedDTO<T>(byte[] ClientRequestData, bool noEncryption)
         {
             string plainJson;
 
-            using (ICryptoTransform decryptor = aes.CreateDecryptor())
+            if (!noEncryption)
             {
-                byte[] encryptedBytes = Convert.FromBase64String(Encoding.ASCII.GetString(ClientRequestData));
-                byte[] plainBytes = decryptor.TransformFinalBlock(encryptedBytes, 0, encryptedBytes.Length);
-                plainJson = Encoding.UTF8.GetString(plainBytes);
+                using (ICryptoTransform decryptor = aes.CreateDecryptor())
+                {
+                    byte[] encryptedBytes = Convert.FromBase64String(Encoding.ASCII.GetString(ClientRequestData));
+                    byte[] plainBytes = decryptor.TransformFinalBlock(encryptedBytes, 0, encryptedBytes.Length);
+                    plainJson = Encoding.UTF8.GetString(plainBytes);
+                }
+                Console.WriteLine(plainJson);
             }
-            Console.WriteLine(plainJson);
+            else
+                plainJson = Encoding.UTF8.GetString(ClientRequestData);
 
             return JsonConvert.DeserializeObject<T>(plainJson);
         }
@@ -125,7 +130,7 @@ namespace PROJ_DCCC.HTTP
                 {
                     var method = typeof(HTTPProcessor).GetMethod("GetDecryptedDTO");
                     var genericMethod = method.MakeGenericMethod(path.request);
-                    request = (HTTPRequest)genericMethod.Invoke(null, new object[] { Client_Req_data });
+                    request = (HTTPRequest)genericMethod.Invoke(null, new object[] { Client_Req_data, path.noEncryption });
                 }
                 response.Process(request);
 
