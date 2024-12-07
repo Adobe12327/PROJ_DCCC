@@ -11,4 +11,7 @@
 		<UserID>root</UserID>
 		<Password></Password>
 	</DataBase>
+	<Features>
+		<Feature name="Big100000000Event" enabled="true" />
+	</Features>
 </Config>

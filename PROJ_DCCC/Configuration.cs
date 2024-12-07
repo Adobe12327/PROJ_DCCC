@@ -18,6 +18,7 @@ namespace PROJ_DCCC
         public static string db_user;
         public static string db_password;
         public static string connStr;
+        public static (string, bool)[] featureList;
         public Configuration()
         {
             XmlDocument XmlFile = new XmlDocument();
@@ -28,6 +29,7 @@ namespace PROJ_DCCC
             aesKey = Convert.FromBase64String(crypto.SelectSingleNode("Key").InnerText);
             aesIV = Convert.FromBase64String(crypto.SelectSingleNode("IV").InnerText);
             port = int.Parse(config.SelectSingleNode("Port").InnerText);
+
             var db = config.SelectSingleNode("DataBase");
             db_server = db.SelectSingleNode("Server").InnerText;
             db_database = db.SelectSingleNode("DataBase").InnerText;
@@ -35,6 +37,14 @@ namespace PROJ_DCCC
             db_password = db.SelectSingleNode("Password").InnerText;
 
             connStr = string.Format("Server={0};Database={1};User ID={2};Password={3};", db_server, db_database, db_user, db_password);
+
+            var features = config.SelectSingleNode("Features");
+            featureList = new (string, bool)[features.ChildNodes.Count];
+            for (int i = 0; i < features.ChildNodes.Count; i++)
+            {
+                XmlNode n = features.ChildNodes[i];
+                featureList[i] = new(n.Attributes["name"].Value, bool.Parse(n.Attributes["enabled"].Value));
+            }
         }
     }
 }

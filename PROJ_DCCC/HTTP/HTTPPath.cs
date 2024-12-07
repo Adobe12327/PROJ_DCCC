@@ -30,7 +30,8 @@ namespace PROJ_DCCC.HTTP
     {
         public static Dictionary<string, DTOs> PathList = new Dictionary<string, DTOs>() {
             { "/service/inspection/check/", new DTOs(null, typeof(RP_CheckService), true)},
-            { "/user/auth/login/", new DTOs(typeof(RQ_Login), typeof(RP_Login), true) }
+            { "/user/auth/login/", new DTOs(typeof(RQ_Login), typeof(RP_Login), true) },
+            { "/setting/control/", new DTOs(null, typeof(RP_ServerEventControl)) }
         };
     }
 }
