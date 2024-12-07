@@ -7,7 +7,7 @@
 	</AesCrypto>
 	<DataBase>
 		<Server>localhost</Server>
-		<Database>dccc1</Database>
+		<DataBase>dccc1</DataBase>
 		<UserID>root</UserID>
 		<Password></Password>
 	</DataBase>

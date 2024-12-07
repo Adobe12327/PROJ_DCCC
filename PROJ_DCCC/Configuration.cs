@@ -31,7 +31,7 @@ namespace PROJ_DCCC
             var db = config.SelectSingleNode("DataBase");
             db_server = db.SelectSingleNode("Server").InnerText;
             db_database = db.SelectSingleNode("DataBase").InnerText;
-            db_user = db.SelectSingleNode("UserId").InnerText;
+            db_user = db.SelectSingleNode("UserID").InnerText;
             db_password = db.SelectSingleNode("Password").InnerText;
 
             connStr = string.Format("Server={0};Database={1};User ID={2};Password={3};", db_server, db_database, db_user, db_password);
