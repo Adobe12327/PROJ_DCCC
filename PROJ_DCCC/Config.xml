@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Config>
-	<IP>127.0.0.1</IP>
+	<IP>*</IP>
 	<Port>5000</Port>
 	<AesCrypto>
 		<Key>2oGR5t0NCoewf2XEC85eyA==</Key>
