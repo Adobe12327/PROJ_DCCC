@@ -63,5 +63,37 @@ namespace PROJ_DCCC.HTTP
                     return -1;
             }
         }
+
+        public static int PayWithGold(long accountSeq, int gold)
+        {
+            using (MySqlConnection mysql = new MySqlConnection(Configuration.connStr))
+            {
+                mysql.Open();
+                string query = "SELECT gold FROM userlist WHERE accountSeq = @accountSeq";
+
+                var cmd = new MySqlCommand(query, mysql);
+                cmd.Parameters.Add("@accountSeq", MySqlDbType.VarChar).Value = accountSeq;
+                var reader = cmd.ExecuteReader();
+                int curGold = 0;
+                if (reader.Read())
+                {
+                    curGold = (int)reader["gold"];
+                }
+                reader.Close();
+
+                if (curGold >= gold)
+                {
+                    query = "UPDATE userlist SET gold = gold - @gold WHERE accountSeq = @accountSeq";
+
+                    cmd = new MySqlCommand(query, mysql);
+                    cmd.Parameters.Add("@gold", MySqlDbType.Int64).Value = gold;
+                    cmd.Parameters.Add("@accountSeq", MySqlDbType.Int64).Value = accountSeq;
+                    cmd.ExecuteNonQuery();
+                    return curGold - gold;
+                }
+                else
+                    return -1;
+            }
+        }
     }
 }
