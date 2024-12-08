@@ -38,6 +38,7 @@ namespace PROJ_DCCC.HTTP
             { "/user/car/list/", new DTOs(typeof(RQ_GetCarList), typeof(RP_GetCarList)) },
             { "/user/character/list/", new DTOs(typeof(RQ_GetCharacterList), typeof(RP_GetCharacterList)) },
             { "/user/character/slot/info/", new DTOs(typeof(RQ_SlotInfo), typeof(RP_SlotInfo)) },
+            { "/shop/item/list/", new DTOs(typeof(RQ_GetItemList), typeof(RP_GetItemList)) },
         };
     }
 }
