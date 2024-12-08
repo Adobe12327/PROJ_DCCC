@@ -12,6 +12,8 @@
 		<Password></Password>
 	</DataBase>
 	<Features>
-		<Feature name="Big100000000Event" enabled="true" />
+		<Feature name="Big100000000Event" enabled="false" />
+		<Feature name="loginAttendEvent" enabled="false" />
+		<Feature name="TimeAttackMode" enabled="false" />
 	</Features>
 </Config>
