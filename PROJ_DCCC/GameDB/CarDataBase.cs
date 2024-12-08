@@ -84,5 +84,17 @@ namespace PROJ_DCCC.DataBase.CarDB
         public UpgradeCostDB UpgradeCostDB;
         public TurningCostDB TurningCostDB;
         public InfoDB CarInfoDB;
+
+        public static CarDataBase Instance;
+
+        public InfoDB.CarData GetCarDataWithID(int CarIndex)
+        {
+            foreach(var c in CarInfoDB.CarDataArray)
+            {
+                if (c.CarIndex == CarIndex)
+                    return c;
+            }
+            return null;
+        }
     }
 }

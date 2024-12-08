@@ -14,7 +14,7 @@ namespace PROJ_DCCC.DataBase
         public static CarDataBase CarDB;
         public GameDB()
         {
-            CarDB = JsonConvert.DeserializeObject<CarDataBase>(JObject.Parse(File.ReadAllText(@"DataBase\CarDataBase.json")).SelectToken("CarDataBase").ToString());
+            CarDataBase.Instance = JsonConvert.DeserializeObject<CarDataBase>(JObject.Parse(File.ReadAllText(@"DataBase\CarDataBase.json")).SelectToken("CarDataBase").ToString());
         }
     }
 }
