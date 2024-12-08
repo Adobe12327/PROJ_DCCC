@@ -13,3 +13,12 @@ namespace PROJ_DCCC.HTTP.DTO
 
     }
 }
+
+namespace PROJ_DCCC.HTTP.DTO.Request
+{
+    public class UserReqInfo
+    {
+        public long token;
+        public long accountSeq;
+    }
+}

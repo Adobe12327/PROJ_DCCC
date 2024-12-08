@@ -194,11 +194,6 @@ namespace PROJ_DCCC.HTTP.DTO.Request
 {
     class RQ_UserInfo : HTTPRequest
     {
-        public class InfoReq
-        {
-            public long token;
-            public long accountSeq;
-        }
-        public InfoReq infoReq;
+        public UserReqInfo infoReq;
     }
 }
