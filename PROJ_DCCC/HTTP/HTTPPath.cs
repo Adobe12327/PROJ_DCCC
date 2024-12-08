@@ -32,7 +32,8 @@ namespace PROJ_DCCC.HTTP
             { "/service/inspection/check/", new DTOs(null, typeof(RP_CheckService), true) },
             { "/user/auth/login/", new DTOs(typeof(RQ_Login), typeof(RP_Login), true) },
             { "/setting/control/", new DTOs(null, typeof(RP_ServerEventControl)) },
-            { "/user/info/get/", new DTOs(typeof(RQ_UserInfo), typeof(RP_UserInfo)) }
+            { "/user/info/get/", new DTOs(typeof(RQ_UserInfo), typeof(RP_UserInfo)) },
+            { "/skill/get/list/", new DTOs(typeof(RQ_CarSkillList), typeof(RP_CarSkillList)) }
         };
     }
 }
