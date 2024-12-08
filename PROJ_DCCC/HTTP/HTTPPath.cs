@@ -45,6 +45,7 @@ namespace PROJ_DCCC.HTTP
             { "/event/letter/get/", new DTOs(typeof(RQ_GetLetter), typeof(RP_GetLetter)) },
             { "/user/character/inventory/info/", new DTOs(typeof(RQ_InventoryInfo), typeof(RP_InventoryInfo)) },
             { "/user/tire/check/", new DTOs(typeof(RQ_TireCheck), typeof(RP_TireCheck)) },
+            { "/tire/present/list/", new DTOs(typeof(RQ_GiftList), typeof(RP_GiftList)) },
         };
     }
 }
