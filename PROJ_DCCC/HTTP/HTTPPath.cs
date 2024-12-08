@@ -43,6 +43,7 @@ namespace PROJ_DCCC.HTTP
             { "/ranking/current/list/", new DTOs(typeof(RQ_GetRank), typeof(RP_GetRank)) },
             { "/ladder/reward/resource/get/", new DTOs(typeof(RQ_GlobalRankingInfo), typeof(RP_GlobalRankingInfo)) },
             { "/event/letter/get/", new DTOs(typeof(RQ_GetLetter), typeof(RP_GetLetter)) },
+            { "/user/character/inventory/info/", new DTOs(typeof(RQ_InventoryInfo), typeof(RP_InventoryInfo)) },
         };
     }
 }
