@@ -27,7 +27,7 @@ namespace PROJ_DCCC.HTTP.DTO.Response
                 using (MySqlConnection mysql = new MySqlConnection(Configuration.connStr))
                 {
                     mysql.Open();
-                    string query = string.Format("SELECT * FROM carskilllist WHERE accountSeq = @accountSeq");
+                    string query = "SELECT * FROM carskilllist WHERE accountSeq = @accountSeq";
 
                     var cmd = new MySqlCommand(query, mysql);
                     cmd.Parameters.Add("@accountSeq", MySqlDbType.Int64).Value = req.skillReq.accountSeq;

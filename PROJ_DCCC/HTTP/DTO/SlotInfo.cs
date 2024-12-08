@@ -34,7 +34,7 @@ namespace PROJ_DCCC.HTTP.DTO.Response
                 using (MySqlConnection mysql = new MySqlConnection(Configuration.connStr))
                 {
                     mysql.Open();
-                    string query = string.Format("SELECT * FROM characterslot WHERE accountSeq = @accountSeq AND driverNo = @driverNo");
+                    string query = "SELECT * FROM characterslot WHERE accountSeq = @accountSeq AND driverNo = @driverNo";
 
                     var cmd = new MySqlCommand(query, mysql);
                     cmd.Parameters.Add("@accountSeq", MySqlDbType.Int64).Value = req.characterReq.accountSeq;
@@ -55,7 +55,7 @@ namespace PROJ_DCCC.HTTP.DTO.Response
 
                     foreach(var slot in slots)
                     {
-                        query = string.Format("SELECT * FROM equipitemlist WHERE accountSeq = @accountSeq AND equipItemNoKey = @equipItemNoKey");
+                        query = "SELECT * FROM equipitemlist WHERE accountSeq = @accountSeq AND equipItemNoKey = @equipItemNoKey";
 
                         cmd = new MySqlCommand(query, mysql);
                         cmd.Parameters.Add("@accountSeq", MySqlDbType.Int64).Value = req.characterReq.accountSeq;

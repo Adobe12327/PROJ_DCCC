@@ -33,9 +33,9 @@ namespace PROJ_DCCC.HTTP.DTO.Response
                 using (MySqlConnection mysql = new MySqlConnection(Configuration.connStr))
                 {
                     mysql.Open();
-                    string selectQuery = string.Format("SELECT * FROM useritemlist WHERE accountSeq = @accountSeq");
+                    string query = "SELECT * FROM useritemlist WHERE accountSeq = @accountSeq";
 
-                    var cmd = new MySqlCommand(selectQuery, mysql);
+                    var cmd = new MySqlCommand(query, mysql);
                     cmd.Parameters.Add("@accountSeq", MySqlDbType.Int64).Value = req.shopReq.accountSeq;
                     var reader = cmd.ExecuteReader();
                     var itemList = new List<ShopItem>();

@@ -21,7 +21,7 @@ namespace PROJ_DCCC.HTTP.DTO.Response
                 using (MySqlConnection mysql = new MySqlConnection(Configuration.connStr))
                 {
                     mysql.Open();
-                    string selectQuery = string.Format("SELECT inventorySpaceCnt, equipItemCnt FROM userlist WHERE accountSeq = @accountSeq");
+                    string selectQuery = "SELECT inventorySpaceCnt, equipItemCnt FROM userlist WHERE accountSeq = @accountSeq";
 
                     var cmd = new MySqlCommand(selectQuery, mysql);
                     cmd.Parameters.Add("@accountSeq", MySqlDbType.Int64).Value = req.characterReq.accountSeq;

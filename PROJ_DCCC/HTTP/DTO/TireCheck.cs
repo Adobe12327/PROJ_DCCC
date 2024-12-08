@@ -27,7 +27,7 @@ namespace PROJ_DCCC.HTTP.DTO.Response
                 using (MySqlConnection mysql = new MySqlConnection(Configuration.connStr))
                 {
                     mysql.Open();
-                    string selectQuery = string.Format("SELECT tireCnt, tireRemainSecs FROM usertireinfo WHERE accountSeq = @accountSeq");
+                    string selectQuery = "SELECT tireCnt, tireRemainSecs FROM usertireinfo WHERE accountSeq = @accountSeq";
 
                     var cmd = new MySqlCommand(selectQuery, mysql);
                     cmd.Parameters.Add("@accountSeq", MySqlDbType.Int64).Value = req.tireCheckReq.accountSeq;

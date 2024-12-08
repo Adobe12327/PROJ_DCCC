@@ -43,9 +43,9 @@ namespace PROJ_DCCC.HTTP.DTO.Response
             using(MySqlConnection mysql = new MySqlConnection(Configuration.connStr))
             {
                 mysql.Open();       
-                string selectQuery = string.Format("SELECT accountSeq, accessToken FROM userlist WHERE userId = @userId");
+                string query = "SELECT accountSeq, accessToken FROM userlist WHERE userId = @userId";
 
-                var cmd = new MySqlCommand(selectQuery, mysql);
+                var cmd = new MySqlCommand(query, mysql);
                 cmd.Parameters.Add("@userId", MySqlDbType.VarChar).Value = req.loginReq.userId;
                 var reader = cmd.ExecuteReader();
                 if (reader.Read())

@@ -20,7 +20,7 @@ namespace PROJ_DCCC.HTTP.DTO.Response
                 using (MySqlConnection mysql = new MySqlConnection(Configuration.connStr))
                 {
                     mysql.Open();
-                    string selectQuery = string.Format("SELECT indexValue FROM letterevent WHERE accountSeq = @accountSeq");
+                    string selectQuery = "SELECT indexValue FROM letterevent WHERE accountSeq = @accountSeq";
 
                     var cmd = new MySqlCommand(selectQuery, mysql);
                     cmd.Parameters.Add("@accountSeq", MySqlDbType.Int64).Value = req.eventReq.accountSeq;

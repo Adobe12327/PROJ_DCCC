@@ -34,7 +34,7 @@ namespace PROJ_DCCC.HTTP.DTO.Response
                 using (MySqlConnection mysql = new MySqlConnection(Configuration.connStr))
                 {
                     mysql.Open();
-                    string query = string.Format("SELECT carSeq FROM userlist WHERE accountSeq = @accountSeq");
+                    string query = "SELECT carSeq FROM userlist WHERE accountSeq = @accountSeq";
 
                     var cmd = new MySqlCommand(query, mysql);
                     cmd.Parameters.Add("@accountSeq", MySqlDbType.VarChar).Value = req.carReq.accountSeq;
@@ -46,7 +46,7 @@ namespace PROJ_DCCC.HTTP.DTO.Response
                     }
                     reader.Close();
 
-                    query = string.Format("SELECT * FROM carlist WHERE accountSeq = @accountSeq");
+                    query = "SELECT * FROM carlist WHERE accountSeq = @accountSeq";
 
                     cmd = new MySqlCommand(query, mysql);
                     cmd.Parameters.Add("@accountSeq", MySqlDbType.VarChar).Value = req.carReq.accountSeq;
