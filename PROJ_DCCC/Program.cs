@@ -1,5 +1,3 @@
-﻿
-
 using System.Data;
 using System.Text;
 using PROJ_DCCC.HTTP;
@@ -14,7 +12,7 @@ namespace PROJ_DCCC
             Console.InputEncoding = Encoding.UTF8;
             new Configuration();
             new DataBase.GameDB();
-            HTTPProcessor processor = new HTTPProcessor($"http://*:{Configuration.port.ToString()}/");
+            HTTPProcessor processor = new HTTPProcessor($"http://0.0.0.0:{Configuration.port.ToString()}/");
             processor.StartListening();
         }
     }
