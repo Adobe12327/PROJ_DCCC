@@ -47,6 +47,7 @@ namespace PROJ_DCCC.HTTP.DTO.Response
                         slot.driverNo = (int)reader["driverNo"];
                         slot.slotNo = (int)reader["slotNo"];
                         slot.equipItemNoKey = reader["equipItemNoKey"].ToString();
+                        slot.slotOpen = (bool)reader["slotOpen"];
                         slotList.Add(slot);
                     }
                     slots = slotList.ToArray();
