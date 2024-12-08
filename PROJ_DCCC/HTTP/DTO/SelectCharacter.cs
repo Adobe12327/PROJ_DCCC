@@ -22,7 +22,7 @@ namespace PROJ_DCCC.HTTP.DTO.Response
 
                     string query = "UPDATE userlist SET characterNo = @characterNo WHERE accountSeq = @accountSeq";
                     var cmd = new MySqlCommand(query, mysql);
-                    cmd.Parameters.Add("@characterNo", MySqlDbType.Int32).Value = req.characterReq.characterNo;
+                    cmd.Parameters.Add("@characterNo", MySqlDbType.Int32).Value = req.characterReq.characterNo - 1;
                     cmd.Parameters.Add("@accountSeq", MySqlDbType.Int64).Value = req.characterReq.accountSeq;
                     cmd.ExecuteNonQuery();
                 }
