@@ -37,6 +37,7 @@ namespace PROJ_DCCC.HTTP
             { "/service/resource/messagelist/", new DTOs(null, typeof(RP_MessageList)) },
             { "/user/car/list/", new DTOs(typeof(RQ_GetCarList), typeof(RP_GetCarList)) },
             { "/user/character/list/", new DTOs(typeof(RQ_GetCharacterList), typeof(RP_GetCharacterList)) },
+            { "/user/character/slot/info/", new DTOs(typeof(RQ_SlotInfo), typeof(RP_SlotInfo)) },
         };
     }
 }
