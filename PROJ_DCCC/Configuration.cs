@@ -12,6 +12,7 @@ namespace PROJ_DCCC
     {
         public static byte[] aesKey;
         public static byte[] aesIV;
+        public static string ip;
         public static int port;
         public static string db_server;
         public static string db_database;
@@ -29,6 +30,7 @@ namespace PROJ_DCCC
             aesKey = Convert.FromBase64String(crypto.SelectSingleNode("Key").InnerText);
             aesIV = Convert.FromBase64String(crypto.SelectSingleNode("IV").InnerText);
             port = int.Parse(config.SelectSingleNode("Port").InnerText);
+            ip = config.SelectSingleNode("IP").InnerText;
 
             var db = config.SelectSingleNode("DataBase");
             db_server = db.SelectSingleNode("Server").InnerText;
