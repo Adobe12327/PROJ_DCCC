@@ -47,6 +47,7 @@ namespace PROJ_DCCC.HTTP
             { "/user/tire/check/", new DTOs(typeof(RQ_TireCheck), typeof(RP_TireCheck)) },
             { "/tire/present/list/", new DTOs(typeof(RQ_GiftList), typeof(RP_GiftList)) },
             { "/shop/car/unlockbuy/", new DTOs(typeof(RQ_UnLockBuyCar), typeof(RP_UnLockBuyCar)) },
+            { "/user/character/equip/info/", new DTOs(typeof(RQ_EquipItemListInfo), typeof(RP_EquipItemListInfo)) },
         };
     }
 }
