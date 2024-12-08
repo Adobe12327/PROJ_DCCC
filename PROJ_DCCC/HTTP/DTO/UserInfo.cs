@@ -86,7 +86,7 @@ namespace PROJ_DCCC.HTTP.DTO.Response
                     string query = string.Format("SELECT * FROM userlist WHERE accountSeq = @accountSeq");
 
                     var cmd = new MySqlCommand(query, mysql);
-                    cmd.Parameters.Add("@accountSeq", MySqlDbType.VarChar).Value = req.infoReq.accountSeq;
+                    cmd.Parameters.Add("@accountSeq", MySqlDbType.Int64).Value = req.infoReq.accountSeq;
                     var reader = cmd.ExecuteReader();
                     if (reader.Read())
                     {
@@ -105,7 +105,7 @@ namespace PROJ_DCCC.HTTP.DTO.Response
                     query = string.Format("SELECT * FROM usertireinfo WHERE accountSeq = @accountSeq");
 
                     cmd = new MySqlCommand(query, mysql);
-                    cmd.Parameters.Add("@accountSeq", MySqlDbType.VarChar).Value = req.infoReq.accountSeq;
+                    cmd.Parameters.Add("@accountSeq", MySqlDbType.Int64).Value = req.infoReq.accountSeq;
                     reader = cmd.ExecuteReader();
                     if (reader.Read())
                     {
@@ -121,7 +121,7 @@ namespace PROJ_DCCC.HTTP.DTO.Response
                     query = string.Format("SELECT * FROM userrecords WHERE accountSeq = @accountSeq");
 
                     cmd = new MySqlCommand(query, mysql);
-                    cmd.Parameters.Add("@accountSeq", MySqlDbType.VarChar).Value = req.infoReq.accountSeq;
+                    cmd.Parameters.Add("@accountSeq", MySqlDbType.Int64).Value = req.infoReq.accountSeq;
                     reader = cmd.ExecuteReader();
                     if (reader.Read())
                     {
@@ -154,7 +154,7 @@ namespace PROJ_DCCC.HTTP.DTO.Response
                     query = string.Format("SELECT * FROM carlist WHERE carSeq = @carSeq");
 
                     cmd = new MySqlCommand(query, mysql);
-                    cmd.Parameters.Add("@carSeq", MySqlDbType.VarChar).Value = info.carSeq;
+                    cmd.Parameters.Add("@carSeq", MySqlDbType.Int64).Value = info.carSeq;
                     reader = cmd.ExecuteReader();
                     if (reader.Read())
                     {
@@ -169,7 +169,7 @@ namespace PROJ_DCCC.HTTP.DTO.Response
                     query = string.Format("SELECT * FROM usermissionlist WHERE accountSeq = @accountSeq");
 
                     cmd = new MySqlCommand(query, mysql);
-                    cmd.Parameters.Add("@accountSeq", MySqlDbType.VarChar).Value = req.infoReq.accountSeq;
+                    cmd.Parameters.Add("@accountSeq", MySqlDbType.Int64).Value = req.infoReq.accountSeq;
                     reader = cmd.ExecuteReader();
                     List<int> missionList = new List<int>();
                     while (reader.Read())

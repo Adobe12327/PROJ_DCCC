@@ -30,7 +30,7 @@ namespace PROJ_DCCC.HTTP.DTO.Response
                     string query = string.Format("SELECT * FROM carskilllist WHERE accountSeq = @accountSeq");
 
                     var cmd = new MySqlCommand(query, mysql);
-                    cmd.Parameters.Add("@accountSeq", MySqlDbType.VarChar).Value = req.skillReq.accountSeq;
+                    cmd.Parameters.Add("@accountSeq", MySqlDbType.Int64).Value = req.skillReq.accountSeq;
                     var reader = cmd.ExecuteReader();
                     var skills = new List<Skill>();
                     while (reader.Read())

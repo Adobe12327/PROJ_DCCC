@@ -29,7 +29,7 @@ namespace PROJ_DCCC.HTTP.DTO.Response
                 string query = string.Format("SELECT characterNo FROM userlist WHERE accountSeq = @accountSeq");
 
                 var cmd = new MySqlCommand(query, mysql);
-                cmd.Parameters.Add("@accountSeq", MySqlDbType.VarChar).Value = req.characterReq.accountSeq;
+                cmd.Parameters.Add("@accountSeq", MySqlDbType.Int64).Value = req.characterReq.accountSeq;
                 var reader = cmd.ExecuteReader();
                 int characterNo = 0;
                 if (reader.Read())
@@ -41,7 +41,7 @@ namespace PROJ_DCCC.HTTP.DTO.Response
                 query = string.Format("SELECT * FROM characterlist WHERE accountSeq = @accountSeq");
 
                 cmd = new MySqlCommand(query, mysql);
-                cmd.Parameters.Add("@accountSeq", MySqlDbType.VarChar).Value = req.characterReq.accountSeq;
+                cmd.Parameters.Add("@accountSeq", MySqlDbType.Int64).Value = req.characterReq.accountSeq;
                 reader = cmd.ExecuteReader();
                 var characterList = new List<Character>();
                 while (reader.Read())
