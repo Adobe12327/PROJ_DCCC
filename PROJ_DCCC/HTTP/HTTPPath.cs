@@ -40,6 +40,7 @@ namespace PROJ_DCCC.HTTP
             { "/user/character/slot/info/", new DTOs(typeof(RQ_SlotInfo), typeof(RP_SlotInfo)) },
             { "/shop/item/list/", new DTOs(typeof(RQ_GetItemList), typeof(RP_GetItemList)) },
             { "/invitation/list/", new DTOs(typeof(RQ_InviteList), typeof(RP_InviteList)) },
+            { "/ranking/current/list/", new DTOs(typeof(RQ_GetRank), typeof(RP_GetRank)) },
         };
     }
 }
