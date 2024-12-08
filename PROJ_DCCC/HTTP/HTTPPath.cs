@@ -49,6 +49,7 @@ namespace PROJ_DCCC.HTTP
             { "/shop/car/unlockbuy/", new DTOs(typeof(RQ_UnLockBuyCar), typeof(RP_UnLockBuyCar)) },
             { "/user/character/equip/info/", new DTOs(typeof(RQ_EquipItemListInfo), typeof(RP_EquipItemListInfo)) },
             { "/user/character/select/", new DTOs(typeof(RQ_SelectCharacter), typeof(RP_SelectCharacter)) },
+            { "/user/character/slot/buy/", new DTOs(typeof(RQ_BuyEquipSlot), typeof(RP_BuyEquipSlot)) },
         };
     }
 }
