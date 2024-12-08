@@ -23,38 +23,41 @@ namespace PROJ_DCCC.HTTP.DTO.Response
         public override void Process(HTTPRequest request)
         {
             var req = (RQ_GetCharacterList)request;
-            using (MySqlConnection mysql = new MySqlConnection(Configuration.connStr))
+            if (Utils.IsVaildToken(req.characterReq.accountSeq, req.characterReq.token))
             {
-                mysql.Open();
-                string query = string.Format("SELECT characterNo FROM userlist WHERE accountSeq = @accountSeq");
-
-                var cmd = new MySqlCommand(query, mysql);
-                cmd.Parameters.Add("@accountSeq", MySqlDbType.Int64).Value = req.characterReq.accountSeq;
-                var reader = cmd.ExecuteReader();
-                int characterNo = 0;
-                if (reader.Read())
+                using (MySqlConnection mysql = new MySqlConnection(Configuration.connStr))
                 {
-                    characterNo = (int)reader["characterNo"];
-                }
-                reader.Close();
+                    mysql.Open();
+                    string query = string.Format("SELECT characterNo FROM userlist WHERE accountSeq = @accountSeq");
 
-                query = string.Format("SELECT * FROM characterlist WHERE accountSeq = @accountSeq");
+                    var cmd = new MySqlCommand(query, mysql);
+                    cmd.Parameters.Add("@accountSeq", MySqlDbType.Int64).Value = req.characterReq.accountSeq;
+                    var reader = cmd.ExecuteReader();
+                    int characterNo = 0;
+                    if (reader.Read())
+                    {
+                        characterNo = (int)reader["characterNo"];
+                    }
+                    reader.Close();
 
-                cmd = new MySqlCommand(query, mysql);
-                cmd.Parameters.Add("@accountSeq", MySqlDbType.Int64).Value = req.characterReq.accountSeq;
-                reader = cmd.ExecuteReader();
-                var characterList = new List<Character>();
-                while (reader.Read())
-                {
-                    var character = new Character();
-                    character.characterNo = (int)reader["characterNo"] + 1;
-                    character.characterType = 0;
-                    character.isSelected = character.characterNo == characterNo;
-                    characterList.Add(character);
+                    query = string.Format("SELECT * FROM characterlist WHERE accountSeq = @accountSeq");
+
+                    cmd = new MySqlCommand(query, mysql);
+                    cmd.Parameters.Add("@accountSeq", MySqlDbType.Int64).Value = req.characterReq.accountSeq;
+                    reader = cmd.ExecuteReader();
+                    var characterList = new List<Character>();
+                    while (reader.Read())
+                    {
+                        var character = new Character();
+                        character.characterNo = (int)reader["characterNo"] + 1;
+                        character.characterType = 0;
+                        character.isSelected = character.characterNo == characterNo;
+                        characterList.Add(character);
+                    }
+                    characters = characterList.ToArray();
                 }
-                characters = characterList.ToArray();
+                success = true;
             }
-            success = true;
         }
     }
 }

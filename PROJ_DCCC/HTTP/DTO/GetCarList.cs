@@ -29,42 +29,45 @@ namespace PROJ_DCCC.HTTP.DTO.Response
         public override void Process(HTTPRequest request)
         {
             var req = (RQ_GetCarList)request;
-            using (MySqlConnection mysql = new MySqlConnection(Configuration.connStr))
+            if (Utils.IsVaildToken(req.carReq.accountSeq, req.carReq.token))
             {
-                mysql.Open();
-                string query = string.Format("SELECT carSeq FROM userlist WHERE accountSeq = @accountSeq");
-
-                var cmd = new MySqlCommand(query, mysql);
-                cmd.Parameters.Add("@accountSeq", MySqlDbType.VarChar).Value = req.carReq.accountSeq;
-                var reader = cmd.ExecuteReader();
-                long carSeq = 0;
-                if (reader.Read())
+                using (MySqlConnection mysql = new MySqlConnection(Configuration.connStr))
                 {
-                    carSeq = (long)reader["carSeq"];
-                }
-                reader.Close();
+                    mysql.Open();
+                    string query = string.Format("SELECT carSeq FROM userlist WHERE accountSeq = @accountSeq");
 
-                query = string.Format("SELECT * FROM carlist WHERE accountSeq = @accountSeq");
+                    var cmd = new MySqlCommand(query, mysql);
+                    cmd.Parameters.Add("@accountSeq", MySqlDbType.VarChar).Value = req.carReq.accountSeq;
+                    var reader = cmd.ExecuteReader();
+                    long carSeq = 0;
+                    if (reader.Read())
+                    {
+                        carSeq = (long)reader["carSeq"];
+                    }
+                    reader.Close();
 
-                cmd = new MySqlCommand(query, mysql);
-                cmd.Parameters.Add("@accountSeq", MySqlDbType.VarChar).Value = req.carReq.accountSeq;
-                reader = cmd.ExecuteReader();
-                var carList = new List<Car>();
-                while (reader.Read())
-                {
-                    var car = new Car();
-                    car.carSeq = (long)reader["carSeq"];
-                    car.carNo = (int)reader["carNo"];
-                    car.carClass = (string)reader["carClass"];
-                    car.carAccel = (int)reader["carAccel"];
-                    car.carSpeed = (int)reader["carSpeed"];
-                    car.carFuleCost = (int)reader["carFuleCost"];
-                    car.isSelected = car.carSeq == carSeq;
-                    carList.Add(car);
+                    query = string.Format("SELECT * FROM carlist WHERE accountSeq = @accountSeq");
+
+                    cmd = new MySqlCommand(query, mysql);
+                    cmd.Parameters.Add("@accountSeq", MySqlDbType.VarChar).Value = req.carReq.accountSeq;
+                    reader = cmd.ExecuteReader();
+                    var carList = new List<Car>();
+                    while (reader.Read())
+                    {
+                        var car = new Car();
+                        car.carSeq = (long)reader["carSeq"];
+                        car.carNo = (int)reader["carNo"];
+                        car.carClass = (string)reader["carClass"];
+                        car.carAccel = (int)reader["carAccel"];
+                        car.carSpeed = (int)reader["carSpeed"];
+                        car.carFuleCost = (int)reader["carFuleCost"];
+                        car.isSelected = car.carSeq == carSeq;
+                        carList.Add(car);
+                    }
+                    cars = carList.ToArray();
                 }
-                cars = carList.ToArray();
+                success = true;
             }
-            success = true;
         }
     }
 }

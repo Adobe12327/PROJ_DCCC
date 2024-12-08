@@ -29,49 +29,52 @@ namespace PROJ_DCCC.HTTP.DTO.Response
         public override void Process(HTTPRequest request)
         {
             var req = (RQ_SlotInfo)request;
-            using (MySqlConnection mysql = new MySqlConnection(Configuration.connStr))
+            if (Utils.IsVaildToken(req.characterReq.accountSeq, req.characterReq.token))
             {
-                mysql.Open();
-                string query = string.Format("SELECT * FROM characterslot WHERE accountSeq = @accountSeq AND driverNo = @driverNo");
-
-                var cmd = new MySqlCommand(query, mysql);
-                cmd.Parameters.Add("@accountSeq", MySqlDbType.Int64).Value = req.characterReq.accountSeq;
-                cmd.Parameters.Add("@driverNo", MySqlDbType.Int32).Value = req.characterReq.driverNo - 1;
-                var reader = cmd.ExecuteReader();
-                var slotList = new List<Slot>();
-                while (reader.Read())
+                using (MySqlConnection mysql = new MySqlConnection(Configuration.connStr))
                 {
-                    var slot = new Slot();
-                    slot.driverNo = (int)reader["driverNo"];
-                    slot.slotNo = (int)reader["slotNo"];
-                    slot.equipItemNoKey = reader["equipItemNoKey"].ToString();
-                    slotList.Add(slot);
-                }
-                slots = slotList.ToArray();
-                reader.Close();
+                    mysql.Open();
+                    string query = string.Format("SELECT * FROM characterslot WHERE accountSeq = @accountSeq AND driverNo = @driverNo");
 
-                foreach(var slot in slots)
-                {
-                    query = string.Format("SELECT * FROM equipitemlist WHERE accountSeq = @accountSeq AND equipItemNoKey = @equipItemNoKey");
-
-                    cmd = new MySqlCommand(query, mysql);
+                    var cmd = new MySqlCommand(query, mysql);
                     cmd.Parameters.Add("@accountSeq", MySqlDbType.Int64).Value = req.characterReq.accountSeq;
-                    cmd.Parameters.Add("@equipItemNoKey", MySqlDbType.Int64).Value = slot.equipItemNoKey;
-                    reader = cmd.ExecuteReader();
-                    if (reader.Read())
+                    cmd.Parameters.Add("@driverNo", MySqlDbType.Int32).Value = req.characterReq.driverNo - 1;
+                    var reader = cmd.ExecuteReader();
+                    var slotList = new List<Slot>();
+                    while (reader.Read())
                     {
-                        slot.equipItemNo = (int)reader["equipItemNo"];
-                        slot.optionNo1 = (int)reader["optionNo1"];
-                        slot.optionNo2 = (int)reader["optionNo2"];
-                        slot.reinforceLevel = (int)reader["reinforceLevel"];
-                        slot.equipItemName = (string)reader["equipItemName"];
-                        slot.saleGoldAmt = (int)reader["saleGoldAmt"];
-                        slot.grade = (string)reader["grade"];
+                        var slot = new Slot();
+                        slot.driverNo = (int)reader["driverNo"];
+                        slot.slotNo = (int)reader["slotNo"];
+                        slot.equipItemNoKey = reader["equipItemNoKey"].ToString();
+                        slotList.Add(slot);
                     }
+                    slots = slotList.ToArray();
                     reader.Close();
+
+                    foreach(var slot in slots)
+                    {
+                        query = string.Format("SELECT * FROM equipitemlist WHERE accountSeq = @accountSeq AND equipItemNoKey = @equipItemNoKey");
+
+                        cmd = new MySqlCommand(query, mysql);
+                        cmd.Parameters.Add("@accountSeq", MySqlDbType.Int64).Value = req.characterReq.accountSeq;
+                        cmd.Parameters.Add("@equipItemNoKey", MySqlDbType.Int64).Value = slot.equipItemNoKey;
+                        reader = cmd.ExecuteReader();
+                        if (reader.Read())
+                        {
+                            slot.equipItemNo = (int)reader["equipItemNo"];
+                            slot.optionNo1 = (int)reader["optionNo1"];
+                            slot.optionNo2 = (int)reader["optionNo2"];
+                            slot.reinforceLevel = (int)reader["reinforceLevel"];
+                            slot.equipItemName = (string)reader["equipItemName"];
+                            slot.saleGoldAmt = (int)reader["saleGoldAmt"];
+                            slot.grade = (string)reader["grade"];
+                        }
+                        reader.Close();
+                    }
                 }
+                success = true;
             }
-            success = true;
         }
     }
 }
