@@ -57,7 +57,7 @@ namespace PROJ_DCCC.HTTP
                     cmd.Parameters.Add("@trophyCnt", MySqlDbType.Int64).Value = trophy;
                     cmd.Parameters.Add("@accountSeq", MySqlDbType.Int64).Value = accountSeq;
                     cmd.ExecuteNonQuery();
-                    return   - trophy;
+                    return curTrophy - trophy;
                 }
                 else
                     return -1;
